@@ -66,7 +66,7 @@ const data = [
     publicationDate: "1965-01-01",
     author: "Frank Herbert",
     genres: ["science fiction", "novel", "adventure"],
-    hasMovieAdaptation: true,
+    hasMovieAdaptation: false,
     pages: 658,
     translations: {
       spanish: "",
@@ -141,4 +141,185 @@ function getBooks() {
 
 function getBook(id) {
   return data.find((d) => d.id === id);
+}
+
+/*
+// Destructuring
+
+const books = getBooks();
+const book = getBook(2);
+
+const {
+  title,
+  author,
+  pages,
+  genres,
+  hasMovieAdaptation,
+  publicationDate,
+  ...others
+} = books[0];
+// title;
+// author;
+// console.log(genres[1], "****", genres[0]);
+// console.log(others);
+
+const newGenres = ["epic fantasy", ...genres];
+// newGenres;
+
+const updatedBook = {
+  ...books[0],
+
+  // Adding a new property
+  moviePublicationdate: "2001-12-22",
+
+  // Overwritng an existing property
+  pages: 1210,
+};
+// updatedBook;
+
+// Arrow function
+
+const getYear = (str) => str.split("-")[0];
+
+// Template literals
+
+const summary = `${title}, a ${pages}-page long book, was written by ${author} and published in ${getYear(
+  publicationDate
+)} `;
+// summary;
+
+// Tenaries instead of ifelse statements
+
+const pagesrange = pages > 1000 ? "over thousand" : "less than 1000";
+// console.log(`The book has ${pagesrange} pages`);
+
+// ShortCircuiting and Logical operators
+
+// console.log(true && "Some text");
+// console.log(false && "Some text");
+// console.log(hasMovieAdaptation && "Some text");
+
+// falsy values: 0, '',null, undefined
+
+// console.log("jonas" && "Some string");
+// console.log(0 && "Some string");
+
+// console.log(true || "Some text");
+// console.log(false || "Some text");
+
+const spanishTranslation = book.translations.spanish || "Not trnslated";
+// spanishTranslation;
+
+// nullish values: null or undefined
+
+const count = book.reviews.librarything.reviewsCount ?? "No data";
+// count;
+
+// Optional chaining
+
+function getTotalReviewCount(book) {
+  const goodreads = book.reviews?.goodreads?.reviewsCount ?? 0;
+  const librarything = book.reviews?.librarything?.reviewsCount ?? 0;
+
+  return goodreads + librarything;
+}
+
+console.log(getTotalReviewCount(books[2]));
+*/
+
+/*
+function getTotalReviewCount(book) {
+  const goodreads = book.reviews?.goodreads?.reviewsCount ?? 0;
+  const librarything = book.reviews?.librarything?.reviewsCount ?? 0;
+
+  return goodreads + librarything;
+}
+
+const books = getBooks();
+
+// Map method
+
+const titles = books.map((book) => book.title);
+// titles;
+
+const essentialData = books.map((book) => ({
+  title: book.title,
+  author: book.author,
+  reviewsCounts: getTotalReviewCount(book),
+}));
+// essentialData;
+
+// Filter method
+
+const longBooksWithMovie = books
+  .filter((book) => book.pages > 500)
+  .filter((book) => book.hasMovieAdaptation);
+// longBooksWithMovie;
+
+const adventureBooks = books
+  .filter((books) => books.genres.includes("adventure"))
+  .map((book) => book.title);
+// adventureBooks;
+
+// Reduce Method
+
+const pagesAllBooks = books.reduce((acc, book) => acc + book.pages, 0);
+// pagesAllBooks;
+
+// Sort Method
+
+const arr = [3, 5, 1, 6, 7, 2, 9];
+const sortedAscendingCopyArray = arr.slice().sort((a, b) => a - b);
+const sortedDescendingCopyArray = arr.slice().sort((a, b) => b - a);
+const sortedOriginalAndNewArrayDescending = arr.sort((a, b) => b - a);
+// sortedAscendingCopyArray;
+// sortedDescendingCopyArray;
+// sortedOriginalAndNewArrayDescending;
+// arr;
+
+const sortedByPages = books.slice().sort((a, b) => b.pages - a.pages);
+// sortedByPages;
+
+// Working with immutable arrays
+
+// 1. Add a new book object to array
+const newBook = {
+  id: 6,
+  title: "harry Poter and the Chamber of Secrets",
+  author: "J. K. Rowling",
+};
+
+const boosAfterAdd = [...books, newBook];
+// boosAfterAdd;
+
+// 2. Delete book object from array
+const boosAfterDelete = boosAfterAdd.filter((book) => book.id !== 1);
+// boosAfterDelete();
+
+// 3. Update book object in the array
+const booksAfterUpdate = (id) =>
+  boosAfterDelete.map((book) =>
+    book.id === id ? { ...book, pages: 1213 } : book
+  );
+// console.log(booksAfterUpdate(3));
+*/
+
+// Asynchronous JavaScript Promises
+fetch("https://jsonplaceholder.typicode.com/todos")
+  .then((res) => res.json())
+  .then((data) => console.log(data))
+  .catch((err) => console.log("Failed to fetch todos", err));
+
+console.log("Jonas");
+
+// Asynchronous JavaScript AsyncAwait
+async function getTodos() {
+  const res = await fetch("https://jsonplaceholder.typicode.com/todos");
+
+  if (!res) {
+    console.log("Todos not found");
+  }
+
+  const data = await res.json();
+  console.log(data);
 }
